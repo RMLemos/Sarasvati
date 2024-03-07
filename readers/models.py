@@ -4,7 +4,6 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 from utils.images import resize_image
 from accounts.models import Profile
-from uuid import uuid4
 
 
 class Base(models.Model):
@@ -21,7 +20,6 @@ class UserBook(Base):
         verbose_name_plural = 'My Books'
         db_table = 'user_books'
 
-    id_book = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     cover = models.ImageField(upload_to='readers/cover', blank=True, default='')
     title = models.CharField('Title', max_length=100)
     publisher = models.CharField('Publisher', max_length=100)
@@ -61,7 +59,6 @@ class Status(Base):
         (3, 'Current reading'),
     )
 
-    id_status = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     status = models.IntegerField(choices=STATUS_CHOICES)
     book = models.ForeignKey(UserBook, related_name='status', on_delete=models.SET_NULL, blank=True, null=True)
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
@@ -77,7 +74,6 @@ class Rating(Base):
         verbose_name_plural = 'Rating'
         db_table = 'rating' 
 
-    id_rating = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     rating = models.PositiveIntegerField(blank=True, null=True, default=0,  validators=[MinValueValidator(0), MaxValueValidator(5),])
     book = models.ForeignKey(UserBook, related_name='rating', on_delete=models.SET_NULL, blank=True, null=True)
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
@@ -93,7 +89,6 @@ class Notes(Base):
         verbose_name_plural = 'Notes'
         db_table = 'notes'
 
-    id_notes = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     note = models.TextField('Notes', blank=True, null=True,)
     book = models.ForeignKey(UserBook, related_name='notes', on_delete=models.SET_NULL, blank=True, null=True)
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE)

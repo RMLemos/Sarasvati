@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'global/css/style.css' %}">
+    <title>Sarasvati</title>
+    <meta name="description" content="Explore books to read next">
+</head>
+<body>
+    <header>
+        <nav>
+            <span class="logo">
+                <a class="logo-link" href="#">Sarasvati</a>
+            </span>
+        </nav>
+    </header>
+    
+    {% block content %}  {% endblock content %}
+
+    <footer>
+        <div class="footer-copy"> © {% now "Y" %} {{ library.title }} - All rights reserved.</div>
+    </footer>
+</body>
+</html>

@@ -20,7 +20,6 @@ class Author(Base):
         verbose_name_plural = 'Authors'
         db_table = 'authors'
 
-    id_author = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     picture = models.ImageField(upload_to='pictures/authors/', blank=True, default='')
     name = models.CharField('Name', max_length=100)
     slug = models.SlugField('Slug', unique=True, max_length=100, blank=True, editable=False)
@@ -55,7 +54,6 @@ class Book(Base):
         verbose_name_plural = 'Books'
         db_table = 'books'
 
-    id_book = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     cover = models.ImageField(upload_to='pictures/cover', blank=True, default='')
     title = models.CharField('Title', max_length=100)
     publisher = models.CharField('Publisher', max_length=100)
